@@ -140,7 +140,7 @@ See the [open issues](https://github.com/Antonomy/invisible_strengths_job_poster
 
 # Contributing
 
-- Antony Yu: [github](https://github.com/Antonomy) and [Linkedin](https://www.linkedin.com/in/antonyyu-operations-peoplemanagement-programmanagement/)
+- Antony Yu: [github](https://github.com/Antonomy) and [Linkedin](https://www.linkedin.com/in/antonyyu/)
 - Devon Aimes: [github](https://github.com/daimes111) and [Linkedin](https://www.linkedin.com/in/devon-aimes111/)
 - Kyra Church:  [github](https://github.com/KyraCChurch) and [Linkedin](https://www.linkedin.com/in/kyra-church01/)
 - Mayerlin Duluc:  [github](https://github.com/MayerlinD) and [Linkedin](https://www.linkedin.com/in/mayerlin-duluc/)
