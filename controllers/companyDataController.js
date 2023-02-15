@@ -2,7 +2,7 @@ const Company = require('../models/company')
 
 const companyDataController = {
   // Index,
-  index(req, res, next) {
+  index (req, res, next) {
     Company.find({}, (err, foundCompanies) => {
       if (err) {
         res.status(400).send({
@@ -15,7 +15,7 @@ const companyDataController = {
     })
   },
   // Destroy
-  destroy(req, res, next) {
+  destroy (req, res, next) {
     Company.findByIdAndDelete(req.params.id, (err, deletedCompany) => {
       if (err) {
         res.status(400).send({
@@ -28,7 +28,7 @@ const companyDataController = {
     })
   },
   // Update
-  update(req, res, next) {
+  update (req, res, next) {
     Company.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedCompany) => {
       if (err) {
         res.status(400).send({
@@ -41,7 +41,7 @@ const companyDataController = {
     })
   },
   // Create
-  create(req, res, next) {
+  create (req, res, next) {
     Company.create(req.body, (err, createdCompany) => {
       if (err) {
         res.status(400).send({
@@ -54,19 +54,19 @@ const companyDataController = {
     })
   },
   // Show
-  show(req, res, next) {
+  show (req, res, next) {
     Company.findById(req.params.id, (err, foundCompany) => {
-        if (err) {
-          res.status(404).send({
-            msg: err.message,
-            output: 'Could not find a company with that ID'
-          })
-        } else {
-          res.locals.data.company = foundCompany
-          next()
-        }
-      })
-    }
+      if (err) {
+        res.status(404).send({
+          msg: err.message,
+          output: 'Could not find a company with that ID'
+        })
+      } else {
+        res.locals.data.company = foundCompany
+        next()
+      }
+    })
+  }
 }
 
 module.exports = companyDataController

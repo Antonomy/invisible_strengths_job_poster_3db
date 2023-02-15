@@ -3,7 +3,7 @@ const Company = require('../models/company')
 
 const jobPostDataController = {
   // Index,
-  index(req, res, next) {
+  index (req, res, next) {
     JobPost.find({}, (err, foundJobPosts) => {
       if (err) {
         res.status(400).send({
@@ -16,7 +16,7 @@ const jobPostDataController = {
     })
   },
   // Destroy
-  async destroy(req, res, next) {
+  async destroy (req, res, next) {
     // JobPost.findByIdAndDelete(req.params.id, (err, deletedJobPost) => {
     //   if (err) {
     //     res.status(400).send({
@@ -41,7 +41,7 @@ const jobPostDataController = {
   },
 
   // Update
-  update(req, res, next) {
+  update (req, res, next) {
     JobPost.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedJobPost) => {
       if (err) {
         res.status(400).send({
@@ -53,8 +53,8 @@ const jobPostDataController = {
       }
     })
   },
-    // Create
-    async create(req, res, next) {
+  // Create
+  async create (req, res, next) {
   // JobPost.create(req.body, (err, createdJobPost) => {
   //   if (err) {
   //     res.status(400).send({
@@ -65,33 +65,33 @@ const jobPostDataController = {
   //     next()
   //   }
   // })
-  try {
-    const newJobPost = await JobPost.create(req.body)
-    await Company.findByIdAndUpdate(newJobPost.company, {
-      $push: {
-        JobPost: newJobPost._id
+    try {
+      const newJobPost = await JobPost.create(req.body)
+      await Company.findByIdAndUpdate(newJobPost.company, {
+        $push: {
+          JobPost: newJobPost._id
+        }
+      })
+      res.status(200).json(newJobPost)
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  // Show
+  show (req, res, next) {
+    JobPost.findById(req.params.id, (err, foundJobPost) => {
+      if (err) {
+        res.status(404).send({
+          msg: err.message,
+          output: 'Could not find a jobPost with that ID'
+        })
+      } else {
+        res.locals.data.jobPost = foundJobPost
+        next()
       }
     })
-    res.status(200).json(newJobPost)
-  } catch (error) {
-    console.log(error)
   }
-},
-
-// Show
-show(req, res, next) {
-  JobPost.findById(req.params.id, (err, foundJobPost) => {
-    if (err) {
-      res.status(404).send({
-        msg: err.message,
-        output: 'Could not find a jobPost with that ID'
-      })
-    } else {
-      res.locals.data.jobPost = foundJobPost
-      next()
-    }
-  })
-}
 }
 
 module.exports = jobPostDataController

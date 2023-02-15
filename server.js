@@ -8,28 +8,27 @@ const MongoStore = require('connect-mongo')
 const db = require('./models/db')
 const app = express()
 
-
 /* Start Config */
 app.use(express.json())
-app.use(express.urlencoded({ extended: true}))
+app.use(express.urlencoded({ extended: true }))
 app.use((req, res, next) => {
-    res.locals.data = {}
-    next()
+  res.locals.data = {}
+  next()
 })
 app.use(cors())
 app.engine('jsx', require('jsx-view-engine').createEngine())
 app.set('view engine', 'jsx')
 db.once('open', () => {
-    console.log('Connected to MongoDB Atlas')
+  console.log('Connected to MongoDB Atlas')
 })
 
 app.use(
-    session({
-        secret: process.env.SECRET,
-        store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
-        saveUninitialized: true,
-        resave: false,
-    })
+  session({
+    secret: process.env.SECRET,
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+    saveUninitialized: true,
+    resave: false
+  })
 )
 /* End Config */
 
